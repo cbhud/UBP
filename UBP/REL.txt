@@ -1,9 +1,0 @@
-zaposleni(id, jmbg, ime, prezime, radni_staz, datum_zaposlenja) 
-vozac(id, sati_voznje, zaposleni_id) //zaposleni_id NOT NULL
-medic_pregled(id, datum_pregleda, nalaz, vozac_id) // vozac_id NOT NULL,
-tip_voza(id, naziv_tipa)
-vozac_tip_voza(vozac_id, tip_voza_id) // tip_voza_id NOT NULL
-voz(id, oznaka, broj_vagona, god_proizvodnje, tip_voza_id) // tip_voza_id NOT NULL
-red_voznje(id, datum_kreiranja, destinacija, datum_vrijeme_polaska, br_mjesta, br_vip_mjesta, zaposleni_id, vozac_id, voz_id) //zaposleni_id, vozac_id, voz_id NOT NULL
-cjenovnik(id, cijena, vip_cijena, red_voznje_id) //red_voznje_id NOT NULL
-karta(id, br_karte, datum_prodaje, ime, prezime, tip_mjesta, red_voznje_id) //red_voznje_id NOT NULL NAPOMENA tip_mjesta moguce vrijednosti su VIP i Obicno
