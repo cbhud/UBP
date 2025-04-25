@@ -119,7 +119,7 @@ The accompanying **Java application** (using JDBC) enables real-time database ac
 - Modular design using classes like `Menu`, `TicketManager`, `TrainManager` etc.
 - Defensive coding techniques to ensure database consistency
 
-> 💡 **Note:** The project focuses primarily on **database design**, but still demonstrates solid Java coding fundamentals and clean architectural principles.
+> 💡 **Note:** The project focuses primarily on **database design and sql optimizations**, — the Java application was a secondary addition, so it may contain some coding mistakes and bad coding practices..
 
 ---
 
@@ -134,26 +134,6 @@ This project demonstrates:
 ✅ Ability to design and implement scalable systems and perform complex queries
 
 > This work reflects both academic knowledge and industry-oriented technical skills.
-
----
-
-## 📁 Project Structure (Example)
-
-```
-📦 railway-database-system/
-├── sql/
-│   └── schema.sql
-├── src/
-│   ├── DbConnector.java
-│   ├── Menu.java
-│   ├── TicketManager.java
-│   └── TrainManager.java
-├── diagrams/
-│   ├── er_model.png
-│   └── relational_model.png
-├── README.md
-└── LICENSE
-```
 
 ---
 
