@@ -1,42 +1,65 @@
-## SQL DATABASE PROJECT
+# 🚄 Railway Management System - SQL Database Project
 
-- Design database
-- Implement database
-- Implement Java app for CRUD operations(I'am aware that there are tons of possible optimizations for JAVA app but here was the focus on DATABASE IMPLEMENTATION)
+_Introduction to Databases Final Exam_
 
-## Documentation:
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  
+[![University](https://img.shields.io/badge/university-Mediteran%20Podgorica-blue)](https://unimediteran.net)  
+[![Faculty](https://img.shields.io/badge/faculty-Information%20Technology-lightgrey)]()
 
-# UNIVERSITY "MEDITERAN" PODGORICA
+---
 
-## FACULTY OF INFORMATION TECHNOLOGY, PODGORICA
+## 📍 University "Mediteran" Podgorica
 
-# INTRODUCTION TO DATABASES
+**Faculty of Information Technology**
 
-# Final Exam - Railway
+📚 **Course:** Introduction to Databases  
+👨‍🏫 **Professor:** Dr. Ivan Knezević  
+🧑‍🎓 **Final Exam Project:** Railway Management System  
+🗓️ **Date:** January 2025  
+📍 **Location:** Podgorica
 
-## Table of Contents:
+---
 
-1. Introduction  
-2. Scenario  
-3. ER Model  
-4. Relational Model  
-5. Diagram  
-6. Application Description  
-7. Conclusion  
+## 📖 Table of Contents
+
+1. [Introduction](#1-introduction)
+2. [Scenario](#2-scenario)
+3. [ER Model](#3-er-model)
+4. [Relational Model](#4-relational-model)
+5. [Diagram](#5-diagram)
+6. [Application Description](#6-application-description)
+7. [Conclusion](#7-conclusion)
 
 ---
 
 ## 1. Introduction
 
-As part of this project, a railway database management system has been developed to efficiently keep track of key business segments. The project includes an ER model, a relational database, and a Java application that manages data and monitors business statistics in real time, allowing management to plan future operations. The documentation provides a detailed overview of the ER model, relational models, diagrams, MySQL implementation, and additional functionalities. The application will enable basic operations on the database, such as adding new data, viewing existing data, updating, and deleting information.
+This project presents a complete **Railway Management System**, built to model real-world operational needs for scheduling, ticketing, and employee management. It consists of:
+
+- An **Entity-Relationship (ER) model**
+- A **normalized relational database**
+- A **Java application** for full CRUD capabilities
+
+This work showcases core technical competencies in:
+
+- SQL database design and normalization
+- Database schema modeling using MySQL Workbench
+- Java development using JDBC and modular object-oriented design
+- Integrating backend systems for real-time data manipulation and reporting
 
 ---
 
 ## 2. Scenario
 
-The scenario is as follows:
+The project simulates a system for railway business operations, including:
 
-“You have been hired by the railway management to create a database for their business operations. Their requirement is to maintain records of trains, schedules, employees, and ticket sales. Each employee is uniquely identified by their personal identification number, and additional information such as name, surname, hiring date, and total work experience should be stored. For drivers, the total hours driven must be recorded. Drivers undergo an annual medical examination, and the dates and findings (text up to 250 characters) of these examinations should be stored in the database. Each train has a unique identifier, an allowed number of wagons, and a year of manufacture. There are several types of trains, such as freight and passenger trains. Each train belongs to exactly one type. For each driver, records must be kept of the types of trains they are authorized to drive. Ticket sales are based on schedules. The schedule is created periodically, and information about its creation date and the employee who created it must be stored. The schedule includes details about the train’s departure date and time, the driver operating the train, as well as the number of standard and VIP passenger seats available, ticket prices, and VIP ticket prices. Passengers purchase tickets based on the schedule. When selling tickets, information such as the sale date, ticket number, the name and surname of the ticket holder, and the ticket price (depending on whether the passenger chose a VIP or standard seat) must be recorded.”
+- Employee and driver management (with unique identification)
+- Recording of medical examinations (with constrained findings)
+- Train and train type classification
+- Schedules and pricing per destination
+- Ticket sales with dynamic pricing (VIP/Standard)
+
+All entities are interlinked and enforced by foreign key constraints, ensuring **data integrity and normalization**.
 
 ---
 
@@ -46,70 +69,103 @@ The scenario is as follows:
 Figure 1. ER Diagram
 ```
 
-As the first step, based on the given scenario, an ER diagram was created as shown in Figure 1. In addition to the information from the scenario, the schedule entity was given an additional attribute, destination, considering its relevance.
+The ER diagram was built based on the scenario, with logical additions such as the `destination` attribute to the `schedule` entity to enhance business relevance.
 
 ---
 
 ## 4. Relational Model
 
-Based on the ER diagram, a relational model was created, where a pricing table was added for normalization to avoid price duplication.
+Below is a simplified representation of the final relational schema:
 
 ```
 employees(id, personal_id, name, surname, work_experience, hiring_date)
-
-drivers(id, driving_hours, employee_id) //employee_id NOT NULL
-
-medical_exam(id, exam_date, findings, driver_id) //driver_id NOT NULL
-
+drivers(id, driving_hours, employee_id)
+medical_exam(id, exam_date, findings, driver_id)
 train_type(id, type_name)
-
-driver_train_type(driver_id, train_type_id) //train_type_id, driver_id NOT NULL
-
-trains(id, identifier, wagon_count, year_of_manufacture, train_type_id) //train_type_id NOT NULL
-
-schedule(id, creation_date, destination, departure_datetime, standard_seats, vip_seats, employee_id, driver_id, train_id) //employee_id, driver_id, train_id NOT NULL
-
-pricing(id, price, vip_price, schedule_id) //schedule_id NOT NULL
-
-tickets(id, ticket_number, sale_date, name, surname, seat_type, schedule_id) //schedule_id NOT NULL
+driver_train_type(driver_id, train_type_id)
+trains(id, identifier, wagon_count, year_of_manufacture, train_type_id)
+schedule(id, creation_date, destination, departure_datetime, standard_seats, vip_seats, employee_id, driver_id, train_id)
+pricing(id, price, vip_price, schedule_id)
+tickets(id, ticket_number, sale_date, name, surname, seat_type, schedule_id)
 ```
 
-**NOTE:** seat_type possible values are VIP and Standard (the price is determined based on the seat type).
+> 🔍 **Normalization applied:** All pricing details moved to a separate `pricing` table to avoid redundancy.
+
+**Note:** `seat_type` can be either _VIP_ or _Standard_, used to determine ticket pricing.
 
 ---
 
 ## 5. Diagram
 
-Based on the work done so far, a diagram was generated using MySQL Workbench.
+The final ER and relational model were visually represented using **MySQL Workbench**, ensuring a **professional and industry-standard layout** for further implementation and documentation.
 
 ```
-Figure 2. Diagram
+Figure 2. Full ER Diagram (MySQL Workbench)
 ```
 
 ---
 
 ## 6. Application Description
 
-The task related to the Java application involved creating an application that enables access, modification, and deletion of data. For these purposes, the JDBC package was used to connect the created MySQL database with the Java application. This is achieved by creating CRUD functions.
+The accompanying **Java application** (using JDBC) enables real-time database access and supports:
 
-The Java application enables:
+- Adding, viewing, updating, and deleting data (CRUD)
+- Business statistics: ticket sales, monthly revenue tracking, etc.
+- Menu-driven interface for easy user interaction via console
 
-- Employee management  
-- Train management  
-- Schedule management  
-- Ticket management  
-- Business statistics display (revenue, number of tickets sold per month, etc.)  
+### 🔧 Java Features
 
-CRUD functions refer to create, read, update, and delete operations.
+- `DbConnector` class handles connection setup and teardown
+- Modular design using classes like `Menu`, `TicketManager`, `TrainManager` etc.
+- Defensive coding techniques to ensure database consistency
 
-The `DbConnector` class contains a constructor for connection management, as well as `open()` and `close()` methods that open and close the database connection as needed.
-
-The `Menus` classes provide a user-friendly interface for calling basic CRUD methods for each of the mentioned functionalities, allowing easy interaction via keyboard input.
-
-Initially, the user selects which table to work with. The menu is displayed on the screen. Selecting a table opens the next menu that offers all available operations for managing the selected table.
+> 💡 **Note:** The project focuses primarily on **database design**, but still demonstrates solid Java coding fundamentals and clean architectural principles.
 
 ---
 
 ## 7. Conclusion
 
-This project demonstrates an understanding of the scenario, ER modeling, and relational diagram development, as well as database integration with a Java application that enables easy data management and business statistics tracking. This system will allow the employer to plan and further develop their business operations effectively.
+This project demonstrates:
+
+✅ Strong understanding of **database architecture** and **normalization**  
+✅ Practical **ER modeling** and **relational design** skills  
+✅ Proficiency with **MySQL** and **SQL schema implementation**  
+✅ Hands-on **Java experience** integrating JDBC and building real-world backend systems  
+✅ Ability to design and implement scalable systems and perform complex queries
+
+> This work reflects both academic knowledge and industry-oriented technical skills.
+
+---
+
+## 📁 Project Structure (Example)
+
+```
+📦 railway-database-system/
+├── sql/
+│   └── schema.sql
+├── src/
+│   ├── DbConnector.java
+│   ├── Menu.java
+│   ├── TicketManager.java
+│   └── TrainManager.java
+├── diagrams/
+│   ├── er_model.png
+│   └── relational_model.png
+├── README.md
+└── LICENSE
+```
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 💬 Feedback & Contributions
+
+Contributions, feedback, and suggestions are welcome.  
+Feel free to open issues or submit pull requests.
+
+---
